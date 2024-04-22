@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import PropTypes from 'prop-types'; // ES6
 import { Link } from "react-router-dom";
 
-const SingleCoffee = ({ singleCoffee }) => {
+const SingleCoffee = ({ singleCoffee, coffees, setCoffees }) => {
 
     const { _id, name, quantity, supplier, taste, photo } = singleCoffee
 
@@ -34,6 +34,9 @@ const SingleCoffee = ({ singleCoffee }) => {
                             text: "Your Coffee has been deleted.",
                             icon: "success"
                         });
+
+                        const remaining = coffees.filter(cof => cof._id !== _id)
+                        setCoffees(remaining)
                     }
                 })
             }
@@ -56,7 +59,7 @@ const SingleCoffee = ({ singleCoffee }) => {
                     <button className="btn btn-info">View</button>
 
                     <Link to={`updateCoffee/${_id}`}><button className="btn btn-success">Edit</button></Link>
-                    
+
                     <button className="btn btn-warning" onClick={()=>handleDelete(_id)}>Delete</button>
                 </div>
             </div>
@@ -65,6 +68,8 @@ const SingleCoffee = ({ singleCoffee }) => {
 };
 
 SingleCoffee.propTypes = {
-    singleCoffee: PropTypes.object
+    singleCoffee: PropTypes.object,
+    coffees: PropTypes.array,
+    setCoffees: PropTypes.func
   };
 export default SingleCoffee;

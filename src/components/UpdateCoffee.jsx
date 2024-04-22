@@ -3,11 +3,13 @@ import Swal from "sweetalert2";
 
 const UpdateCoffee = () => {
 
-    const  {_id, name, quantity, supplier, taste, category, details, photo} = useLoaderData()
+    const coffee = useLoaderData();
+    const { _id, name, quantity, supplier, taste, category, details, photo } = coffee;
 
-    const handleUpdateCoffee = event =>{
+    const handleUpdateCoffee = event => {
         event.preventDefault();
-        const form = event.target
+
+        const form = event.target;
 
         const name = form.name.value;
         const quantity = form.quantity.value;
@@ -17,32 +19,30 @@ const UpdateCoffee = () => {
         const details = form.details.value;
         const photo = form.photo.value;
 
-        const UpdateCoffee = {name, quantity, supplier, taste, category, details, photo}
+        const updatedCoffee = { name, quantity, supplier, taste, category, details, photo }
 
-        console.log(UpdateCoffee)
+        console.log(updatedCoffee);
 
+        // send data to the server
         fetch(`http://localhost:5000/coffee/${_id}`, {
-            method: "PUT",
+            method: 'PUT',
             headers: {
-                "Content-Type": "application/json",
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-              },
-            body: JSON.stringify(UpdateCoffee),
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedCoffee)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            if(data.insertedId.length > 0){
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Coffee Updated successfully',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                  })
-            }
-
-            form.reset()
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Coffee Updated Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Cool'
+                    })
+                }
+            })
     }
     return (
         <div className="bg-[#F4F3F0] md:p-24">

@@ -22,7 +22,7 @@ const SignUp = () => {
                 const createAt = result.user.metadata.creationTime;
 
                 const user = { email, createAt };
-                fetch(`http://localhost:5000/user`, {
+                fetch(`https://coffee-store-server-rekkhyg25-shohans-projects-b5403d71.vercel.app/user`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -72,7 +72,7 @@ const SignUp = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button type="submit" className="btn btn-primary">Login</button>
+                            <button type="submit" className="btn btn-primary">SignUp</button>
                         </div>
                     </form>
                 </div>

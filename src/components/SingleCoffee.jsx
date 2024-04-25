@@ -22,7 +22,7 @@ const SingleCoffee = ({ singleCoffee, coffees, setCoffees }) => {
             if (result.isConfirmed) {
                 
                 console.log('deleted confirm')
-                fetch(`http://localhost:5000/coffee/${_id}`, {
+                fetch(`https://coffee-store-server-rekkhyg25-shohans-projects-b5403d71.vercel.app/coffee/${_id}`, {
                     method: 'DELETE',
                 })
                 .then(res => res.json())
